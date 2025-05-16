@@ -1,83 +1,52 @@
-export const Logo="LOGO"
-const  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscin Lorem "
-const btn="Get a Quote"
-export const Hero = {
-    title: "Transforming Digital Brands Since 1898",
-    img: [
-        '/src/assets/images/bannerimg1.svg',
-        '/src/assets/images/bannerimg 2.svg',
-        '/src/assets/images/bannerimg 3.svg'
-    ],
-    btn: "Get a Quote",
-    ctabtn: "See Our Work"
-};
-export const CardSection=[
+export const navbar=[
     {
-        id:"1",
-        color:"#FA0069",
-        title:"Graphic Design",
-        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscin Lorem ",
-        btn:btn
-        
+        id:1,
+        text:"Madelyn Torff",
     },
     {
-        id:"2",
-        color:"#002FD8",
-        title:"Web Development",
-        description:description,
-        btn:btn
-    }
-    ,
-    {
-        id:"3",
-        color:"#04CA00",
-        title:"Visual Consultation",
-        description:description,
-        btn:btn
-    }
-    ,
-    {
-        id:"4",
-        color:"#B900FA",
-        title:"Product Design",
-        description:description,
-        btn:btn
-    }
-]
-export const Testimonialsection=[
-    {
-        id:"1",
-        btn:"Flowers Design",
-        img:"/src/assets/images/testimonial 4.svg"
+        id:2,
+        text:"About",
     },
     {
-        id:"2",
-        btn:"Abstract Design",
-        img:"/src/assets/images/testimonial 2.svg"
-    }
-    ,
+        id:3,
+        text:"Projects",
+    },
     {
-        id:"3",
-        btn:"Creative Painting",
-        img:"/src/assets/images/testimonial 3.svg"
-    }
-    ,
-    {
-        id:"4",
-        btn:"Product Design",
-        img:"/src/assets/images/testimonial 1.svg"
-    }
-    ,
-    {
-        id:"5",
-        btn:"Creative Painting",
-        img:"/src/assets/images/testimonial 5.svg"
-    }
+        id:4,
+        text:"Contacts",
+    },
 ]
-export const footersection={
-    logo:"LOGO",
-    date:"1898-2022",
-    text:["Home","Works","About Us","Contact Us","Careers","Investors","Developers","Refferal Program",
-        "Privacy Policy","Cookie Policy","Terms and Conditions"
-    ]
+export const banner ={
+    img:"",
+    text:"UI/UX Designer",
+    heading:"Hello,  my name is Madelyn Torff",
+    details:"Short text with details about you, what you do or your professional career. You can add more information on the about page.",
+    btn:["Projects","LinkedIn"]
 }
+const projectname ="Project Name"
+const btn ="View Project"
+export const Cards=[
+    {
+        id:1,
+        name:projectname,
+        details:"I created this personal project in order to show how to create an interface in Figma using a portfolio as an example.",
+        btn:btn
+    },
+    {
+        id:2,
+        name:projectname,
+        details:"What was your role, your deliverables, if the project was personal, freelancing.",
+        btn:btn,
+    },
+    {
+        id:3,
+        name:projectname,
+        details:"You can also add in this description the type of the project, if it was for web, mobile, electron.",
+        btn:btn
+    },
+] 
+ export const foother=
+    {
+        id:1,
+        icon:["/footer.svg","/footer 2svg.svg","/footer3.svg"]
+    }
