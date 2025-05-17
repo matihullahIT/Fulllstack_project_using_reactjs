@@ -1,23 +1,26 @@
-export const navbar=[
+export const navbarSection=[
     {
         id:1,
         text:"Madelyn Torff",
+        link:"/home"
     },
     {
         id:2,
         text:"About",
+        link:"/about"
     },
     {
         id:3,
         text:"Projects",
+        link:"/projects"
     },
     {
         id:4,
         text:"Contacts",
+        link:"/contact"
     },
 ]
-export const banner ={
-    img:"",
+export const bannerSection ={
     text:"UI/UX Designer",
     heading:"Hello,  my name is Madelyn Torff",
     details:"Short text with details about you, what you do or your professional career. You can add more information on the about page.",
