@@ -11,7 +11,7 @@ const Banner = () => {
         lg:relative 
         h-screen w-auto flex flex-col  px-9   justify-center">
           <h1  className="text-yellow-500  text-xl">{bannerSection.text}</h1>
-          <h2 className="font-bold playfair text-6xl">Hello, my name<br/>  is Madelyn Torff</h2>
+          <h2 className="font-bold playfair text-6xl">Hello, my name<br/>  is Matih ur Rehman</h2>
           <p>{bannerSection.details}</p>
           <div className=" flex gap-4">
             {btn.map((item, index) => (
