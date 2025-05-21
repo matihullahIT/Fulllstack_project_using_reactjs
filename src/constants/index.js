@@ -1,7 +1,7 @@
 export const navbarSection=[
     {
         id:1,
-        text:"Madelyn Torff",
+        text:"Matih ur Rehman",
         link:"/"
     },
     {
@@ -12,20 +12,21 @@ export const navbarSection=[
     {
         id:3,
         text:"Projects",
-        link:"/projects"
+        link:"#projects"
     },
     {
         id:4,
         text:"Contacts",
-        link:"/contact"
+        link:"#contact"
     },
 ]
 export const bannerSection ={
     text:"UI/UX Designer",
     heading:"Hello, <b/> my name is Madelyn Torff",
     details:"Short text with details about you, what you do or your professional career. You can add more information on the about page.",
-    btn:["Projects","LinkedIn"]
+    btn:["Projects","LinkedIn"],
 }
+export const linkedin="https://www.linkedin.com/in/matih-urrehman-11a859212/"
 const projectname ="Project Name"
 const btn ="View Project"
 export const testimonialSection=[

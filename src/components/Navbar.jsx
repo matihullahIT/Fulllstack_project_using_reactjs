@@ -3,11 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 
-
 const Navbar = () => {
   const [toggler, settoggler] = useState(false);
   return (
-    <div className="z-40 py-3 flex justify-center items-center ">
+    <div className="z-40 py-3 flex justify-center items-center w-full">
       <div className="flex items-center justify-between w-full max-w-6xl px-4 text-black">
         <div className="flex-1 flex items-center">
           {navbarSection.map((item, index) => (
@@ -25,7 +24,7 @@ const Navbar = () => {
               : null
           ))}
         </div>
-        <div className="flex items-center">
+        <div className="flex justify-center items-center">
           <button onClick={() => settoggler(!toggler)} className="block lg:hidden md:hidden text-3xl font-bold rounded-md transition-all ease-in-out hover:bg-gray-400 px-3 py-2 hover:text-white hover:bg-backdrop-blur-lg">
             <FontAwesomeIcon icon={faBars} />
           </button>
@@ -35,7 +34,7 @@ const Navbar = () => {
           className={`
             absolute
             ${toggler ? "block" : "hidden"}
-            top-15 flex flex-col gap-5 w-screen py-4 right-3 bg-yellow-400 text-white
+            top-15 flex flex-col  items-centergap-5 w-screen py-4 right-3 bg-yellow-400 text-white
             md:static md:flex md:flex-row md:gap-5 md:w-auto md:py-0 md:bg-transparent md:text-black 
             lg:static lg:flex lg:flex-row lg:gap-5 lg:w-auto lg:py-0 lg:bg-none lg:text-black 
             xl:static xl:flex xl:flex-row xl:gap-5 xl:w-auto xl:py-0 xl:bg-none xl:text-black 
