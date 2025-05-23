@@ -5,7 +5,7 @@ const Banner = () => {
     <div className=" flex  
     md:flex-row
      lg:flex-row
-      relative -z-10 items-center justify-center h-screen borde-2">
+      relative -z-10   items-center justify-center h-screen borde-2">
         <div className=" absolute 
         md:relative 
         lg:relative 
