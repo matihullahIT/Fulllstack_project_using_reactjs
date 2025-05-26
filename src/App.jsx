@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={
             <div className="flex flex-col items-center justify-center">
@@ -35,7 +35,7 @@ function App() {
           } />
           <Route path="/about" element={<Aboutus />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
   )
 }
