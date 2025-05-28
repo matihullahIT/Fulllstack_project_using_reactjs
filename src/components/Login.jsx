@@ -3,14 +3,51 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import{toast, ToastContainer, Bounce}from "react-toastify"
+import { auth } from "../firebase";
 const Login = () => {
     const { register, handleSubmit,formState: { errors } } = useForm();
-    const onSubmit = (data) => {
+    // Import your Firebase auth instance
+    const onSubmit  = async (data) => {
         console.log(data);
-    };
+        try {
+            const userlogin = await signInWithEmailAndPassword(auth, data.username, data.password);
+            toast.success('User successfully logged in', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+            console.log(userlogin);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    document.title="Login"
     const [toggler, setToggler] = useState(false);
     return (
         <div className="flex items-center justify-center bg-gray-400 min-h-screen w-full px-2 capitalize">
+  <ToastContainer
+    position="top-center"
+    autoClose={1000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick={false}
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+    transition={Bounce}
+  />
             <div className="border rounded-md bg-white w-full max-w-md md:max-w-lg lg:max-w-xl h-auto p-6 shadow-lg">
                 <h2 className="font-bold text-3xl md:text-4xl text-center mb-4">login</h2>
                 <form className="flex flex-col gap-4" autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
@@ -22,7 +59,7 @@ const Login = () => {
                         placeholder="John"
                         className="border rounded-sm text-lg md:text-2xl focus:outline-2 px-2 py-1"
                     />
-                    {errors.username?<p className="text-red-500 font-bold animate-pulse capitalize">*incorrect username</p>:null}
+                    {errors.username?<p className="text-red-500 font-bold animate-pulse capitalize">*Invalid username</p>:null}
                     <label htmlFor="password" className="font-bold">Password</label>
                     <div className="relative flex items-center">
                         <input
@@ -41,7 +78,7 @@ const Login = () => {
                             <FontAwesomeIcon icon={toggler ? faEye : faEyeSlash} />
                         </button>
                     </div>
-                    {errors.password?<p className="text-red-500 font-bold animate-pulse capitalize">*incorrect password</p>:null}
+                    {errors.password?<p className="text-red-500 font-bold animate-pulse capitalize">*Invalid password</p>:null}
                     <div className="flex items-center gap-2">
                         <input
                             type="checkbox"
