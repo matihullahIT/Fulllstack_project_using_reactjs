@@ -1,33 +1,57 @@
-
+import { auth,db} from "../firebase";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
- 
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+
 const Register = () => {
+    const navigate=useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [toggler, setToggler] = useState({
         password:false,
         confirm_password:false
     });
 
-    const onSubmit = (data) => {
-        if (data.password === data.confirm_password) {
-            console.log(data);
-            Swal.fire({
-                title:"User Registerd",
-                icon:"success",
+    // ...existing code...
+const onSubmit = async (data) => {
+    if (data.password === data.confirm_password) {
+        try {
+            const userCredentials = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            await updateProfile(userCredentials.user, {
+                displayName: data.name
+            });
+            await setDoc(doc(db, "users", userCredentials.user.uid), {
+                name: data.name,
+                email: data.email,
+                date: new Date(),
             })
-        } else {
             Swal.fire({
-                title:"Passwords do not match!",
-                icon:"error ",
+                title:"user Registered",
+                icon:"success"
+            })
+            navigate("/")
+        }
+        catch (err) {
+            console.log(err);
+            Swal.fire({
+                title: err.message || "Registration failed!",
+                icon: "error",
             });
         }
-    };
-
+    } else {
+        Swal.fire({
+            title: "Passwords do not match!",
+            icon: "error",
+        }); 
+    }
+};
+// ...existing code...
+document.title="Register"
     return (
         <div className="flex items-center justify-center bg-gray-400 min-h-screen w-full px-2  capitalize
         ">
@@ -44,15 +68,15 @@ const Register = () => {
                     />
                     {errors.name?<p className="text-red-500 font-bold animate-pulse capitalize">*Invalid Name</p>:null}
 
-                    <label htmlFor="username" className="font-bold">Username</label>
+                    <label htmlFor="email" className="font-bold">Email</label>
                     <input
-                        id="username"
-                        type="text"
-                        {...register("username", { required: true })}
-                        placeholder="John"
+                        id="email"
+                        type="email"
+                        {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+                        placeholder="john@example.com"
                         className="border rounded-sm text-lg md:text-2xl focus:outline-2 px-2 py-1"
                     />
-                    {errors.username?<p className="text-red-500 font-bold animate-pulse capitalize">*Invalid username</p>:null}
+                    {errors.email ? <p className="text-red-500 font-bold animate-pulse capitalize">*Invalid email</p> : null}
                     <label htmlFor="password" className="font-bold">Password</label>
                     <div className="relative flex items-center">
                         <input
@@ -92,18 +116,10 @@ const Register = () => {
                     {errors.confirm_password ? (
                         <p className="text-red-500 font-bold animate-pulse capitalize">*invalid password</p>
                     ) : null}
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            name="remember_me"
-                            {...register("remember_me")}
-                            id="remember_me"
-                        />
-                        <label htmlFor="remember_me">Remember Me</label>
-                    </div>
                     <input
                         type="submit"
-                        className="bg-black text-white text-lg md:text-2xl rounded-3xl py-2 transition-all ease-in-out hover:scale-105 hover:bg-gray-900 cursor-pointer"
+                        className="bg-black text-white text-lg md:text-2xl rounded-3xl py-2 transition-all ease-in-out
+                        hover:scale-105 hover:bg-gray-900 cursor-pointer"
                         value="Submit"
                     />
                     <h3>Already have an account? <Link to="/login" className="text-blue-700 underline underline-offset-1 font-bold italic">Login</Link></h3>
