@@ -26,6 +26,17 @@ const Login = () => {
                 transition: Bounce,
             });
             console.log(userlogin);
+            toast.success('Invalid user credentails', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
         }
         catch(err){
             console.log(err);
