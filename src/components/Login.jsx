@@ -26,7 +26,10 @@ const Login = () => {
                 transition: Bounce,
             });
             console.log(userlogin);
-            toast.success('Invalid user credentails', {
+                    }
+        catch(err){
+            console.log(err);
+            toast.error('Invalid user credentails', {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -37,10 +40,9 @@ const Login = () => {
                 theme: "light",
                 transition: Bounce,
             });
+
         }
-        catch(err){
-            console.log(err);
-        }
+
     }
     document.title="Login"
     const [toggler, setToggler] = useState(false);
@@ -61,7 +63,7 @@ const Login = () => {
   />
             <div className="border rounded-md bg-white w-full max-w-md md:max-w-lg lg:max-w-xl h-auto p-6 shadow-lg">
                 <h2 className="font-bold text-3xl md:text-4xl text-center mb-4">login</h2>
-                <form className="flex flex-col gap-4" autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
+                <form className="flex flex-col gap-4" autoComplete="on" onSubmit={handleSubmit(onSubmit)} method="POST">
                     <label htmlFor="username" className="font-bold">Name</label>
                     <input
                         id="username"
