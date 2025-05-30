@@ -93,7 +93,7 @@ const Tasks = () => {
     transition={Bounce}
   />
             <h1 className="font-bold text-4xl p-3 italic">Current Tasks</h1>
-            <div className="flex flex-col items-center w-1/2 h-auto">
+            <div className="flex flex-col items-center w-auto  h-auto">
                 {data.length === 0 ? (
                     <div>no data</div>
                 ) : (
