@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import Swal from 'sweetalert2';
+import { Link,useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import{toast, ToastContainer, Bounce}from "react-toastify"
 import { auth } from "../firebase";
 const Login = () => {
     const { register, handleSubmit,formState: { errors } } = useForm();
+    const navigate = useNavigate();
     // Import your Firebase auth instance
     const onSubmit  = async (data) => {
         console.log(data);
@@ -25,6 +25,7 @@ const Login = () => {
                 theme: "light",
                 transition: Bounce,
             });
+            navigate("/tasks")
             console.log(userlogin);
                     }
         catch(err){
