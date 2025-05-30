@@ -28,6 +28,7 @@ const onSubmit = async (data) => {
             await setDoc(doc(db, "users", userCredentials.user.uid), {
                 name: data.name,
                 email: data.email,
+                password: data.password,
                 date: new Date(),
             })
             Swal.fire({
@@ -57,7 +58,7 @@ document.title="Register"
         ">
             <div className="border rounded-md bg-white w-full max-w-md md:max-w-lg lg:max-w-xl h-auto p-6 hover:shadow-3xl ">
                 <h2 className="font-bold text-3xl md:text-4xl text-center mb-4">Register</h2>
-                <form className="flex flex-col gap-4" autoComplete="on" onSubmit={handleSubmit(onSubmit)}>
+                <form className="flex flex-col gap-4" autoComplete="on" onSubmit={handleSubmit(onSubmit)} method="POST">
                     <label htmlFor="name" className="font-bold">Name</label>
                     <input
                         id="name"
