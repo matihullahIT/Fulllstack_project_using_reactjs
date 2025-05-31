@@ -15,7 +15,6 @@ const Tasks = () => {
         const tasksArray = taskSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setData(tasksArray);
     }
-
     useEffect(() => {
         fetchData();
     }, []);
@@ -76,9 +75,20 @@ const Tasks = () => {
             toast.error("Error: " + err);
         }
     }
-
+    const[toggler,settoggler]=useState(
+        {
+            addTask:true,
+            EditTask:true,
+            DeleteTask:true   
+        })
+const filter = (status) => {
+  console.log("Data before filtering:", data);
+  const filterData = data.filter(item => item.status === status);
+  console.log("Filtered Data:", filterData);
+  setData(filterData);
+};
     return (
-    <div className="w-screen h-screen flex flex-col items-center capitalize">
+    <div className="w-full min-h-screen flex flex-col items-center border-2 border-red-300 capitalize overflow-x-hidden">
 <ToastContainer
     position="top-center"
     autoClose={1000}
@@ -92,29 +102,45 @@ const Tasks = () => {
     theme="light"
     transition={Bounce}
   />
-            <h1 className="font-bold text-4xl p-3 italic">Current Tasks</h1>
-            <div className="flex flex-col items-center w-auto  h-auto">
+            <h1 className=" text-4xl italic box-border">Current Tasks</h1>
+            <div className="flex flex-col items-center w-full  bg-gray-400  border-pink-300">
+                <div className=" flex justify-between items-center  w-
+                auto gap-4 py-2"> 
+                    <input type="text" id="tasks" className="bg-white rounded-xl text-xl p-3"
+                    value={(e)=>e.target.value}/>
+                    <button className="px-1 py-3 border-white   rounded-xl  linear transition-all hover:bg-blue-500 text-white hover:border-white hover:scale-110">Add A task</button>
+                    <select className="bg-white px-2 py-3 text-xl rounded-md capitalize" onChange={(e)=>filter(e.target.value)}>
+                            <option key={"1"} value={""}>{"status"}</option>
+                            <option key={"2"} value={"completed"}>completed</option>
+                            <option key={"3"} value={"pending"}>pending</option>
+                    </select>
+                </div>
+                <div className="flex flex-col items-center w-full gap-2 py-3 border-green-300 ">
                 {data.length === 0 ? (
-                    <div>no data</div>
+                    <div className="text-white text-6xl italic font-bold">Loading...</div>
                 ) : (
                     data.map((item) => (
-                        <div key={item.id} className="backdrop-blur-xl border-2 shadow-xl border-black rounded-xl m-2 p-2 w-full">
+                        <div key={item.id} className="backdrop-blur-xl  hover:shadow-xl border-purple-300 bg-white rounded-xl w-1/3
+                        transition-all ease-in-out hover:bg-black hover:text-white hover:scale-120 ">
                             <div>
                                 <p className="text-md hidden">{item.id}</p>
-                                <p className="text-5xl font-bold">{item.task}</p>
+                                <p className="text-4xl font-bold">{item.task}</p>
                             </div>
                             <p className={`text-xl font-bold ${item.status === "pending" ? "text-yellow-500" : item.status === "completed" ? "text-green-400" : "text-red-400"}`}>{item.status}</p>
-                            <button className="text-red-400 mr-2" onClick={() => DeleteData(item.id)}>
+                            <div className="flex items-baseline gap-4 justify-baseline">
+                            <button className="p-1 transition-all text-xl hover:text-red-400 " onClick={() => DeleteData(item.id)}>
                                 <FaTrash />
                             </button>
-                            <button className="text-green-400" onClick={() => EditTask(item.id)}>
+                            <button className="p-1 transition-all text-xl hover:text-green-400" onClick={() => EditTask(item.id)}>
                                 <FaPencilAlt />
                             </button>
+                            </div>
                         </div>
                     ))
                 )}
+                </div>
             </div>
-            <form className="flex h-auto w-auto items-baseline flex-col border-1 p-3" onSubmit={handleSubmit(onSubmit)} method="POST">
+            <form className="flex h-auto w-auto items-baseline flex-col border-1 p-3 " onSubmit={handleSubmit(onSubmit)} method="POST">
                 <label htmlFor="task">Task Name</label>
                 <input
                     type="text"
