@@ -25,4 +25,4 @@ dist-ssr
 *.sln
 *.sw?
 firebase.js
-Redux/
+src/Redux
