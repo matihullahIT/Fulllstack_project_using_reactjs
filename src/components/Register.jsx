@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-
+import {useUser} from "../Context"
 const Register = () => {
     const navigate=useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -16,7 +16,7 @@ const Register = () => {
         password:false,
         confirm_password:false
     });
-
+    const {user,setUser}=useUser()
     // ...existing code...
 const onSubmit = async (data) => {
     if (data.password === data.confirm_password) {
@@ -32,10 +32,11 @@ const onSubmit = async (data) => {
                 date: new Date(),
             })
             Swal.fire({
-                title:"user Registered",
+                title:"user Registered"+user.username,
                 icon:"success"
             })
             navigate("/")
+            setUser(data);
         }
         catch (err) {
             console.log(err);
