@@ -7,6 +7,7 @@ import {toast, ToastContainer, Bounce} from "react-toastify"
 import {useUser} from "../Context"
 import Popup from "../components/Popup"
 const Tasks = () => {
+  document.title="Tasks"
     const {user} =useUser()
     const [data, setData] = useState([]);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -55,8 +56,8 @@ async function fetchData() {
 
     function EditTask(id) {
       settoggler(prev => ({ ...prev,EditTask: !prev.EditTask }))
+      setEdit(data.find((item) => item.id === id));
       console.log(toggler.EditTask)
-         setEdit(data.find((item) => item.id === id));
     }
 
     async function handleEditSubmit(e) {
@@ -65,6 +66,7 @@ async function fetchData() {
         const taskRef = doc(db, "tasks", editTask.id);
         try {
           settoggler(prev => ({ ...prev,EditTask: !prev.EditTask }))
+          console.log(toggler.EditTask)
             await updateDoc(taskRef, {
                 task: editTask.task,
                 status: editTask.status,
@@ -118,6 +120,7 @@ return(
                     <option value="">Select status</option>
                     <option value="pending">pending</option>
                     <option value="completed">completed</option>
+                    <option value="cancle">cancle</option>
                 </select>
                 {errors.status ? <p className="text-red-400 animate-pulse">invalid status</p> : null}
                 <div className="flex w-full">
@@ -166,6 +169,7 @@ const EditTasks= () => {
             <option value="">Select status</option>
             <option value="pending">pending</option>
             <option value="completed">completed</option>
+            <option value="cancle">cancle</option>
           </select>
           <div className="flex">
           <input
@@ -226,6 +230,7 @@ const EditTasks= () => {
                             <option key={"1"} value={""}>{"status"}</option>
                             <option key={"2"} value={"completed"}>completed</option>
                             <option key={"3"} value={"pending"}>pending</option>
+                            <option value="cancle">cancle</option>
                     </select>
                 </div>
                 <div className="flex flex-col items-baseline w-full gap-2 py-3 border-green-300 ">
