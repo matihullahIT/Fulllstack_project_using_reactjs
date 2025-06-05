@@ -1,8 +1,8 @@
 import "./index.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import Login from "./components/Login"
-import Register from "./components/Register"
+import Login from "./Pages/Login"
+import Register from "./Pages/Register"
 import Tasks from "./Pages/Tasks";
 import Provider from "./Context"
 function App() {
@@ -19,8 +19,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/register" element={<Register/>}/>
-          <Route path="/" element={<Login />} />
-          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Tasks />} />
         </Routes>
       </BrowserRouter>
     </div>
