@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Login from "./components/Login"
 import Register from "./components/Register"
 import Tasks from "./Pages/Tasks";
+import Provider from "./Context"
 function App() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -13,6 +14,7 @@ function App() {
   }, []);
 
   return (
+      <Provider>
     <div className="">
       <BrowserRouter>
         <Routes>
@@ -22,6 +24,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+      </Provider>
   )
 }
 
