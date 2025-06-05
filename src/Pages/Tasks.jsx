@@ -72,12 +72,13 @@ async function fetchData() {
             toast.success("Task Updated");
             setEdit({ task: "", status: "", id: null });
             fetchData();
+            console.log(toggler.editTask)
         } catch (err) {
             console.log(err);
             toast.error("Error: " + err);
         }
     }
-const [toggler, settoggler] = useState({ addTask:false, EditTask:false, DeleteTask:true });
+const [toggler, settoggler] = useState({ addTask:false, EditTask:true});
 
 const filter = (e) => {
   console.log("Filtering from original data:", orginaldata);
@@ -100,12 +101,14 @@ function findTask(e) {
 
 const EnterData=()=>{
 return(
-                <form className="flex h-full w-full items-baseline flex-col border-1 p-3 " onSubmit={handleSubmit(onSubmit)} method="POST">
+                <form className="flex h-full w-full items-baseline flex-col  p-3 " onSubmit={handleSubmit(onSubmit)} method="POST">
                 <label htmlFor="task">Task Name</label>
                 <textarea
                     type="text"
                     className="border-2 border-gray-300 rounded-xl px-4 py-2 shadow-sm"
                     id="task"
+                    cols={30}
+                    rows={5}
                     {...register("task", { required: true })}
                 >
                   </textarea>
@@ -129,7 +132,7 @@ const EditTasks= () => {
     <>
       {editTask.id && (
         <form
-          className="flex h-auto w-auto items-baseline flex-col border-1 p-3 mt-4"
+          className="flex h-auto w-auto items-baseline flex-col p-3 mt-4"
           onSubmit={handleEditSubmit}
           method="PUt"
         >
@@ -137,6 +140,7 @@ const EditTasks= () => {
           <textarea
             type="text"
             cols={30}
+                    rows={5}
             className="border-2 rounded-lg"
             id="edit-task"
             value={editTask.task}
@@ -163,18 +167,21 @@ const EditTasks= () => {
             <option value="pending">pending</option>
             <option value="completed">completed</option>
           </select>
+          <div className="flex">
           <input
             type="submit"
             value="Update"
             className="border-2 rounded-md px-3 py-2 font-bold mt-2"
-          />
+            />
+          <button className="border-2 rounded-md px-3 py-2 font-bold text-white mt-2 w-full bg-[#252525]" onClick={()=>settoggler(prev => ({ ...prev,EditTask: !prev.EditTask }))}>cancle</button>
+            </div>
         </form>
       )}
     </>
   );
 };
     return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center border-2 border-red-300 capitalize overflow-x-hidden">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center  capitalize overflow-x-hidden">
 <ToastContainer
     position="top-center"
     autoClose={1000}
@@ -190,9 +197,12 @@ const EditTasks= () => {
   />
   { toggler.addTask?
   <Popup className="  items-center justify-center">
+    <h1 className="text-2xl font-bold text-center">Enter Task</h1>
     <EnterData/>
-  </Popup>:toggler.editTask?
+  </Popup>:null}
+  {toggler.editTask?
   <Popup>
+    <h1 className="text-2xl font-bold text-center">Edit Task</h1>
     <EditTasks/>
   </Popup>
   :null
