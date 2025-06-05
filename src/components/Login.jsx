@@ -6,15 +6,17 @@ import { Link,useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import{toast, ToastContainer, Bounce}from "react-toastify"
 import { auth } from "../firebase";
+import {useUser} from "../Context"
 const Login = () => {
     const { register, handleSubmit,formState: { errors } } = useForm();
     const navigate = useNavigate();
+    const {user,setUser} =useUser()
     // Import your Firebase auth instance
     const onSubmit  = async (data) => {
         console.log(data);
         try {
             const userlogin = await signInWithEmailAndPassword(auth, data.username, data.password);
-            toast.success('User successfully logged in', {
+            toast.success('User successfully logged in'+user.username, {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -25,8 +27,8 @@ const Login = () => {
                 theme: "light",
                 transition: Bounce,
             });
+            setUser(data);
             navigate("/tasks")
-            console.log(userlogin);
                     }
         catch(err){
             console.log(err);
