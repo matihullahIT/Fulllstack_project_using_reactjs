@@ -6,7 +6,14 @@ import { useForm } from "react-hook-form";
 import {toast, ToastContainer, Bounce} from "react-toastify"
 import {useUser} from "../Context"
 import Popup from "../components/Popup"
+import { useNavigate } from "react-router-dom";
 const Tasks = () => {
+   const Navigate=useNavigate()
+   function  ValidateUser(){
+    if (!user){
+      Navigate("/login")
+    }
+  }
   document.title="Tasks"
     const {user} =useUser()
     const [data, setData] = useState([]);
@@ -26,6 +33,7 @@ async function fetchData() {
         fetchData();
         setorginaldata(data);
         console.log(user)
+        console.log("initial stage  "+toggler.EditTask)
     }, []);
     async function onSubmit(formData) {
         const newTask = {
@@ -55,9 +63,9 @@ async function fetchData() {
     }
 
     function EditTask(id) {
-      settoggler(prev => ({ ...prev,EditTask: !prev.EditTask }))
+      settoggler(prev => ({ ...prev, EditTask: !prev.EditTask }))
       setEdit(data.find((item) => item.id === id));
-      console.log(toggler.EditTask)
+              console.log("Edit task  "+toggler.EditTask)
     }
 
     async function handleEditSubmit(e) {
@@ -65,7 +73,7 @@ async function fetchData() {
         if (!editTask.task || !editTask.status || !editTask.id) return;
         const taskRef = doc(db, "tasks", editTask.id);
         try {
-          settoggler(prev => ({ ...prev,EditTask: !prev.EditTask }))
+        settoggler(prev => ({ ...prev, editTask: !prev.editTask }))
           console.log(toggler.EditTask)
             await updateDoc(taskRef, {
                 task: editTask.task,
@@ -80,7 +88,7 @@ async function fetchData() {
             toast.error("Error: " + err);
         }
     }
-const [toggler, settoggler] = useState({ addTask:false, EditTask:true});
+const [toggler, settoggler] = useState({ addTask:false, EditTask:false});
 
 const filter = (e) => {
   console.log("Filtering from original data:", orginaldata);
@@ -177,7 +185,7 @@ const EditTasks= () => {
             value="Update"
             className="border-2 rounded-md px-3 py-2 font-bold mt-2"
             />
-          <button className="border-2 rounded-md px-3 py-2 font-bold text-white mt-2 w-full bg-[#252525]" onClick={()=>settoggler(prev => ({ ...prev,EditTask: !prev.EditTask }))}>cancle</button>
+          <button className="border-2 rounded-md px-3 py-2 font-bold text-white mt-2 w-full bg-[#252525]" onClick={()=>settoggler(prev => ({ ...prev, EditTask: !prev.EditTask }))}>cancle</button>
             </div>
         </form>
       )}
