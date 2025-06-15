@@ -16,7 +16,7 @@ const Login = () => {
         console.log(data);
         try {
             const userlogin = await signInWithEmailAndPassword(auth, data.username, data.password);
-            toast.success('User successfully logged in'+user.username, {
+            toast.success('User successfully logged in'+userlogin.username, {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -28,7 +28,7 @@ const Login = () => {
                 transition: Bounce,
             });
             setUser(data);
-            navigate("/tasks")
+            navigate("/")
                     }
         catch(err){
             console.log(err);
@@ -67,7 +67,7 @@ const Login = () => {
             <div className="border rounded-md bg-white w-full max-w-md md:max-w-lg lg:max-w-xl h-auto p-6 shadow-lg">
                 <h2 className="font-bold text-3xl md:text-4xl text-center mb-4">login</h2>
                 <form className="flex flex-col gap-4" autoComplete="on" onSubmit={handleSubmit(onSubmit)} method="POST">
-                    <label htmlFor="username" className="font-bold">Name</label>
+                    <label htmlFor="username" className="font-bold">Email</label>
                     <input
                         id="username"
                         type="text"
