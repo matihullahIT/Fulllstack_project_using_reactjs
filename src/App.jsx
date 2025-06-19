@@ -5,6 +5,7 @@ import Login from "./Pages/Login"
 import Register from "./Pages/Register"
 import Tasks from "./Pages/Tasks";
 import Provider from "./Context"
+import Users from "./Pages/Users";
 function App() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/register" element={<Register/>}/>
           <Route path="/login" element={<Login />} />
+          <Route path="/user" element={<Users />} />
           <Route path="/" element={<Tasks />} />
         </Routes>
       </BrowserRouter>
