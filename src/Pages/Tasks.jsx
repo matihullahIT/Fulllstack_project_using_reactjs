@@ -14,6 +14,7 @@ const Tasks = () => {
       Navigate("/login")
     }
   }
+  // ValidateUser()
   document.title="Tasks"
     const {user} =useUser()
     const [data, setData] = useState([]);
@@ -39,7 +40,8 @@ async function fetchData() {
         const newTask = {
             task: formData.task,
             status: formData.status,
-            created_at: Date.now()
+            created_at: Date.now(),
+            by_user:formData.user
         };
         try {
             await addDoc(collection(db, "tasks"), newTask);
@@ -112,6 +114,14 @@ function findTask(e) {
 const EnterData=()=>{
 return(
                 <form className="flex h-full w-full items-baseline flex-col  p-3 " onSubmit={handleSubmit(onSubmit)} method="POST">
+               <input
+  type="text"
+  id="user"
+  value={user?.username || "john doe"}
+  className="hidden"
+  {...register("user", { required: true })}
+/>
+
                 <label htmlFor="task">Task Name</label>
                 <textarea
                     type="text"
