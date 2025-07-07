@@ -7,10 +7,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import{toast, ToastContainer, Bounce}from "react-toastify"
 import { auth } from "../firebase";
 import {useUser} from "../Context"
+import { GoogleSignup } from "./GoogleSignup";
 const Login = () => {
     const { register, handleSubmit,formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const {user,setUser} =useUser()
+    const {setUser} =useUser()
     // Import your Firebase auth instance
     const onSubmit  = async (data) => {
         console.log(data);
@@ -111,11 +112,11 @@ const Login = () => {
                     />
                 </form>
                 <h3>Haven't <Link to="/register" className="text-blue-700 underline underline-offset-1 font-bold italic">registered</Link> yet?</h3>
+            <br className="" />
+      <GoogleSignup/>
             </div>
         </div>
     );
 };
 
 export default Login;
-
-
