@@ -16,19 +16,20 @@ const Tasks = () => {
   }
   // ValidateUser()
   document.title="Tasks"
-    const {user} =useUser()
-    const [data, setData] = useState([]);
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const [editTask, setEdit] = useState({ task: "", status: "", id: null });
-    
-async function fetchData() {
-  const dataRef = collection(db, "tasks");
-  const taskSnapshot = await getDocs(dataRef);
-  const tasksArray = taskSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  setData(tasksArray);
-  setorginaldata(tasksArray); // Move this here
-}
-
+  const {user} =useUser()
+  const [data, setData] = useState([]);
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const [editTask, setEdit] = useState({ task: "", status: "", id: null });
+  
+  async function fetchData() {
+    const dataRef = collection(db, "tasks");
+    const taskSnapshot = await getDocs(dataRef);
+    const tasksArray = taskSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setData(tasksArray);
+    setorginaldata(tasksArray); // Move this here
+  }
+  
+  console.log(user)
     const [orginaldata,setorginaldata]=useState([])
     useEffect(() => {
         fetchData();
