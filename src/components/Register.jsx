@@ -9,6 +9,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {useUser} from "../Context"
+import {GoogleSignup} from "./GoogleSignup"
+
 const Register = () => {
     const navigate=useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -126,6 +128,7 @@ document.title="Register"
                     />
                     <h3>Already have an account? <Link to="/login" className="text-blue-700 underline underline-offset-1 font-bold italic">Login</Link></h3>
                 </form>
+                <GoogleSignup/>
             </div>
         </div>
     );
