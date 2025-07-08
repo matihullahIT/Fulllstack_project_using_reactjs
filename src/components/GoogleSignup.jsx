@@ -9,7 +9,7 @@ async function HandleGooglesingup(){
     try{
 const result= await signInWithPopup(auth,provider);
 const user=result.user;
-setUser(user);
+setUser(user.email);
 Navgate("/");
 console.log("user information"+user)
     }
